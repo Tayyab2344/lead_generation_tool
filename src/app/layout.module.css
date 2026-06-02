@@ -1,0 +1,310 @@
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: hsl(var(--bg-primary-hsl));
+  transition: padding var(--transition-normal);
+}
+
+/* Sidebar styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: hsl(var(--bg-secondary-hsl));
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: width var(--transition-normal);
+}
+
+.sidebarCollapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.sidebarBrand {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.brandLogo {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, hsl(var(--primary-hsl)), hsl(var(--accent-hsl)));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.brandName {
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, hsl(var(--text-secondary-hsl)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+  transition: opacity var(--transition-normal);
+}
+
+.brandNameHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebarNav {
+  flex: 1;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  color: hsl(var(--text-secondary-hsl));
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: hsl(var(--text-primary-hsl));
+}
+
+.navItemActive {
+  background: hsl(var(--primary-hsl));
+  color: white !important;
+  box-shadow: var(--shadow-primary);
+  font-weight: 600;
+}
+
+.navLabel {
+  white-space: nowrap;
+  transition: opacity var(--transition-normal);
+}
+
+.navLabelHidden {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+}
+
+.sidebarFooter {
+  padding: 20px 16px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: hsl(var(--bg-tertiary-hsl));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: hsl(var(--primary-hsl));
+  border: 2px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: opacity var(--transition-normal);
+}
+
+.userName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.userRole {
+  font-size: 0.75rem;
+  color: hsl(var(--text-muted-hsl));
+  white-space: nowrap;
+}
+
+/* Main workspace area */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  transition: margin-left var(--transition-normal);
+}
+
+.mainCollapsed {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
+/* Header bar */
+.header {
+  height: var(--header-height);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.collapseButton {
+  background: none;
+  border: none;
+  color: hsl(var(--text-secondary-hsl));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.collapseButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: hsl(var(--text-primary-hsl));
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: hsl(var(--text-muted-hsl));
+  font-weight: 500;
+}
+
+.breadcrumbSeparator {
+  color: hsl(var(--text-muted-hsl));
+}
+
+.breadcrumbActive {
+  color: hsl(var(--text-primary-hsl));
+  font-weight: 600;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.actionButton {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: hsl(var(--text-secondary-hsl));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.actionButton:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: hsl(var(--text-primary-hsl));
+  border-color: hsl(var(--text-muted-hsl));
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: hsl(var(--danger-hsl));
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid hsl(var(--bg-primary-hsl));
+}
+
+/* Page content area */
+.content {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+/* Floating mail debugger */
+.mailDebugger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+}
+
+.mailBadge {
+  background: linear-gradient(135deg, hsl(var(--primary-hsl)), hsl(var(--accent-hsl)));
+  color: white;
+  padding: 12px 18px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-normal);
+}
+
+.mailBadge:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 24px rgba(104, 117, 245, 0.4);
+}

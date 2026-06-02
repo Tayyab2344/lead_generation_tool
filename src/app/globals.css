@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Fonts */
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  /* HSL Color System - Dark Theme Defaults */
+  --bg-primary-hsl: 222, 47%, 11%;     /* Deep Space Blue */
+  --bg-secondary-hsl: 223, 47%, 7%;     /* Darker base */
+  --bg-tertiary-hsl: 220, 40%, 16%;     /* Card background */
+  
+  --text-primary-hsl: 210, 40%, 98%;    /* Clean white */
+  --text-secondary-hsl: 215, 20%, 75%;  /* Slate gray */
+  --text-muted-hsl: 217, 10%, 55%;      /* Dimmed gray */
+  
+  --primary-hsl: 250, 84%, 67%;         /* Vivid Indigo */
+  --primary-hover-hsl: 250, 95%, 72%;
+  --primary-glow: rgba(104, 117, 245, 0.25);
+  
+  --accent-hsl: 190, 90%, 50%;          /* Cyan Accent */
+  
+  /* Status Colors */
+  --success-hsl: 142, 70%, 45%;         /* Emerald Green */
+  --warning-hsl: 37, 90%, 50%;          /* Amber Warning */
+  --danger-hsl: 350, 80%, 55%;          /* Crimson Red */
+  
+  /* Borders and Glassmorphism */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(104, 117, 245, 0.5);
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-blur: 16px;
+  
+  /* Shadows and Offsets */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.3);
+  --shadow-primary: 0 8px 24px rgba(104, 117, 245, 0.3);
+  
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 80px;
+  --header-height: 70px;
+  
+  /* Input Custom System */
+  --input-bg: rgba(0, 0, 0, 0.25);
+  --input-bg-focus: rgba(0, 0, 0, 0.35);
+  --input-border: var(--border-color);
+  --input-border-focus: hsl(var(--primary-hsl));
+  --input-shadow-focus: 0 0 0 4px var(--primary-glow);
+}
+
+/* Light Theme Variables */
+[data-theme='light'] {
+  --bg-primary-hsl: 210, 40%, 98%;     /* Very light slate */
+  --bg-secondary-hsl: 0, 0%, 100%;       /* Pure white */
+  --bg-tertiary-hsl: 214, 32%, 91%;     /* Soft gray */
+  
+  --text-primary-hsl: 222, 47%, 11%;    /* Dark space blue */
+  --text-secondary-hsl: 217, 19%, 35%;  /* Medium slate */
+  --text-muted-hsl: 220, 9%, 56%;       /* Dimmed gray */
+  
+  --primary-hsl: 250, 84%, 57%;         /* Darker Indigo */
+  --primary-hover-hsl: 250, 90%, 50%;
+  --primary-glow: rgba(90, 75, 218, 0.15);
+  
+  --accent-hsl: 190, 95%, 40%;
+  
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-focus: rgba(90, 75, 218, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-blur: 16px;
+  
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.08);
+  --shadow-primary: 0 8px 24px rgba(90, 75, 218, 0.15);
+  
+  /* Input Custom System (Light Mode overrides) */
+  --input-bg: rgba(15, 23, 42, 0.05);
+  --input-bg-focus: rgba(15, 23, 42, 0.02);
+  --input-border: rgba(15, 23, 42, 0.12);
+  --input-border-focus: hsl(var(--primary-hsl));
+  --input-shadow-focus: 0 0 0 4px rgba(90, 75, 218, 0.15);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: hsl(var(--bg-primary-hsl));
+  color: hsl(var(--text-primary-hsl));
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--bg-secondary-hsl));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--bg-tertiary-hsl));
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary-hsl));
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: hsl(var(--text-primary-hsl));
+}
+
+p {
+  color: hsl(var(--text-secondary-hsl));
+  line-height: 1.6;
+}
+
+a {
+  color: hsl(var(--primary-hsl));
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: hsl(var(--primary-hover-hsl));
+}
+
+/* Glassmorphism Presets */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+}
+
+.glass-panel-hover {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.glass-panel-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: hsl(var(--primary-hsl));
+  color: #fff !important;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: hsl(var(--primary-hover-hsl));
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(104, 117, 245, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: hsl(var(--bg-tertiary-hsl));
+  color: hsl(var(--text-primary-hsl)) !important;
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: hsl(var(--text-muted-hsl));
+}
+
+.btn-danger {
+  background: hsl(var(--danger-hsl));
+  color: #fff !important;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: hsl(var(--danger-hsl), 90%);
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form Inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: hsl(var(--text-secondary-hsl));
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-md);
+  color: hsl(var(--text-primary-hsl));
+  transition: all var(--transition-normal);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: var(--input-shadow-focus);
+  background: var(--input-bg-focus);
+}
+
+.form-input::placeholder {
+  color: hsl(var(--text-muted-hsl));
+}
+
+/* Premium Select Styling with custom Chevron */
+select.form-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  padding-right: 42px !important;
+  cursor: pointer;
+}
+
+[data-theme='light'] select.form-input {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+select.form-input option {
+  background-color: hsl(var(--bg-tertiary-hsl));
+  color: hsl(var(--text-primary-hsl));
+}
+
+.form-input-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: hsl(var(--primary-hsl));
+  cursor: pointer;
+}
+
+.form-input-error {
+  border-color: hsl(var(--danger-hsl)) !important;
+}
+
+.form-error-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: hsl(var(--danger-hsl));
+  margin-top: 4px;
+}
+
+/* Flex Wrapper for input icons alignment */
+.form-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--text-muted-hsl));
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-normal);
+}
+
+.form-group:focus-within .form-input-icon {
+  color: hsl(var(--primary-hsl));
+}
+
+/* Verification states */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-verified {
+  background: rgba(16, 185, 129, 0.15);
+  color: hsl(var(--success-hsl));
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.status-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: hsl(var(--warning-hsl));
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.status-suspended {
+  background: rgba(239, 68, 68, 0.15);
+  color: hsl(var(--danger-hsl));
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--transition-normal) forwards;
+}

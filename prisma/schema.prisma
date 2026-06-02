@@ -1,0 +1,106 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique // Administrator, Manager, Sales Representative, Analyst
+  description String
+  users       User[]
+}
+
+model User {
+  id           String         @id @default(uuid())
+  firstName    String
+  lastName     String
+  email        String         @unique
+  passwordHash String
+  phoneNumber  String?
+  profileImage String?        // Profile picture URL or Base64
+  roleId       String
+  role         Role           @relation(fields: [roleId], references: [id])
+  status       String         @default("PENDING_VERIFICATION") // PENDING_VERIFICATION, VERIFIED, SUSPENDED
+  companyName  String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  
+  sessions      Session[]
+  notifications Notification[]
+  settings      Settings?
+  loginHistory  LoginHistory[]
+}
+
+model Session {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token          String   @unique
+  deviceInfo     String   // Browser / OS summary
+  ipAddress      String   @default("127.0.0.1")
+  loginTime      DateTime @default(now())
+  expirationTime DateTime
+  status         String   @default("ACTIVE") // ACTIVE, REVOKED, EXPIRED
+}
+
+model LoginHistory {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress  String
+  deviceInfo String
+  timestamp  DateTime @default(now())
+  status     String   // SUCCESS, FAILED
+}
+
+model Notification {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type       String   // SECURITY, ACCOUNT, CAMPAIGN, SYSTEM
+  title      String
+  message    String
+  readStatus Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model Settings {
+  id                       String  @id @default(uuid())
+  userId                   String  @unique
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  language                 String  @default("en")
+  timeZone                 String  @default("UTC")
+  dateFormat               String  @default("YYYY-MM-DD")
+  theme                    String  @default("dark") // dark, light
+  emailNotifications       Boolean @default(true)
+  systemNotifications      Boolean @default(true)
+  campaignAlerts           Boolean @default(true)
+  leadAlerts               Boolean @default(true)
+  dataSharing              Boolean @default(false)
+  accountVisibility        String  @default("private")
+  communicationPreferences String  @default("email")
+}
+
+model VerificationToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  type      String   // VERIFY_EMAIL, RESET_PASSWORD
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+// Table to store mock emails for developer verification
+model SentEmail {
+  id        String   @id @default(uuid())
+  to        String
+  subject   String
+  body      String
+  token     String?
+  type      String   // VERIFICATION, PASSWORD_RESET
+  createdAt DateTime @default(now())
+}
