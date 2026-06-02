@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import Logo from '@/components/Logo';
 import { 
   LayoutDashboard, 
   Users, 
@@ -196,7 +197,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* SIDEBAR NAVIGATION */}
       <aside className={`${styles.sidebar} ${isCollapsed ? styles.sidebarCollapsed : ''}`}>
         <div className={styles.sidebarBrand}>
-          <div className={styles.brandLogo}>LP</div>
+          <Logo size={32} />
           <span className={`${styles.brandName} ${isCollapsed ? styles.brandNameHidden : ''}`}>
             LeadPulse
           </span>

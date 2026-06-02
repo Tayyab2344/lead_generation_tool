@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import { 
   ArrowRight, 
   Users, 
@@ -40,18 +41,8 @@ export default function Home() {
         padding: '0 40px',
         background: 'rgba(15, 23, 42, 0.4)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{
-            width: '32px',
-            height: '32px',
-            background: 'linear-gradient(135deg, hsl(var(--primary-hsl)), hsl(var(--accent-hsl)))',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: '800'
-          }}>LP</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Logo size={32} />
           <span style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.03em' }}>LeadPulse</span>
         </div>
 

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Logo from '@/components/Logo';
 import { LogIn, ArrowRight, ShieldCheck, Mail, Lock } from 'lucide-react';
 
 function LoginContent() {
@@ -82,18 +83,8 @@ function LoginContent() {
         }}
       >
         {/* BRAND LOGO */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginBottom: '32px' }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            background: 'linear-gradient(135deg, hsl(var(--primary-hsl)), hsl(var(--accent-hsl)))',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: '800'
-          }}>LP</div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '32px' }}>
+          <Logo size={36} />
           <span style={{ fontSize: '1.5rem', fontWeight: '800', letterSpacing: '-0.03em' }}>LeadPulse</span>
         </div>
 

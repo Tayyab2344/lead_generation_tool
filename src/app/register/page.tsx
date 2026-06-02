@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Logo from '@/components/Logo';
 import { UserPlus, ArrowRight, ShieldCheck, Mail, Building2, Check } from 'lucide-react';
 
 interface Role {
@@ -105,18 +106,8 @@ export default function Register() {
         }}
       >
         {/* BRAND */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginBottom: '32px' }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            background: 'linear-gradient(135deg, hsl(var(--primary-hsl)), hsl(var(--accent-hsl)))',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: '800'
-          }}>LP</div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '32px' }}>
+          <Logo size={36} />
           <span style={{ fontSize: '1.5rem', fontWeight: '800', letterSpacing: '-0.03em' }}>LeadPulse</span>
         </div>
 
